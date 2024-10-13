@@ -48,11 +48,12 @@ jobs:
     - uses: actions/download-artifact@master
       with:
           name: artifacts
-    - name: Deploy to CloudHub Sandbox env
+    - name: Deploy to CloudHub dev env
       env:
         ANYPOINT_USERNAME: ${{secrets.ANYPOINT_PLATFORM_USERNAME }}   # Corrected variable name
         ANYPOINT_PASSWORD: ${{secrets.ANYPOINT_PLATFORM_PASSWORD }}   # Corrected variable name
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn clean install
-        mvn deploy -DmuleDeploy -Danypoint.username=$ANYPOINT_USERNAME -Danypoint.password=$ANYPOINT_PASSWORD -Dcloudhub.application.name=papi -Dregion=us-east-2 -Denvironment=dev
+        mvn deploy -DmuleDeploy -Danypoint.username=$ANYPOINT_USERNAME -Danypoint.password=$ANYPOINT_PASSWORD -Dcloudhub.application.name=papi -Dregion=us-east-2 -Denvironment=dev 
+        -X
